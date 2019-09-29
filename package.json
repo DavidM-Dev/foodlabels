@@ -7,7 +7,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest",
-    "lint": "lynt"
+    "lint": "lynt --typescript --react",
+    "precommit": "yarn lint-staged && yarn lint"
   },
   "dependencies": {
     "expo": "^35.0.0",
@@ -35,10 +36,21 @@
     "preset": "jest-expo",
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|sentry-expo|native-base)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "jsx",
+      "node"
     ]
   },
-  "eslintConfig": {
-    "extends": "universe/native"
+  "lint-staged": {
+    "*.{tsx,ts,js,css,md}": [
+       "prettier --config .prettierrc --write",
+       "git add"
+    ]
   },
   "private": true
 }
